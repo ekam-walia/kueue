@@ -968,7 +968,7 @@ func (s *Scheduler) updateAssignmentIfNeeded(
 	snapshot *schdcache.Snapshot,
 	cq *schdcache.ClusterQueueSnapshot,
 	preemptedWorkloads preemption.PreemptedWorkloads) (bool, error) {
-	fitsCheck := e.checkFits(log, snapshot, cq, preemptedWorkloads)
+	fitsCheck := e.checkFits(log, snapshot, cq, nil)
 	if e.assignment.WaitingForResidualTASPods && fitsCheck == schdcache.FitsCheckNoTAS {
 		return false, nil
 	}
