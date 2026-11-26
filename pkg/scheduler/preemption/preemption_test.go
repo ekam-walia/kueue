@@ -5133,8 +5133,8 @@ func TestPreemptionMessage(t *testing.T) {
 	}
 	for _, tc := range cases {
 		got := preemptionMessage(tc.preemptor, tc.reason, tc.preemptorPath, tc.preempteePath)
-		if got != tc.want {
-			t.Errorf("preemptionMessage(preemptor=kueue.Workload{UID:%v, Labels:%v}, reason=%q) returned %q, want %q", tc.preemptor.UID, tc.preemptor.Labels, tc.reason, got, tc.want)
+		if diff := cmp.Diff(tc.want, got); diff != "" {
+			t.Errorf("Unexpected preemption message (-want,+got):\n%s", diff)
 		}
 	}
 }
